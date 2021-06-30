@@ -5,7 +5,7 @@ import jade.core.behaviours.Behaviour;
 
 import net.sf.clipsrules.jni.*;
 
-public class ClipsAgent extends Agent {
+public class ClipsAgent2 extends Agent {
 
     private ClipsAgentGui myGui;
 

@@ -75,9 +75,10 @@ class ClipsAgentGui extends JFrame {
 
         // Make the agent terminate when the user closes 
 		// the GUI using the button on the upper right corner	
-		addWindowListener(new	WindowAdapter() {
+		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				myAgent.doDelete();
+				System.out.println("Closing Window...");
+				myAgent.terminate();
 			}
 		} );
 		

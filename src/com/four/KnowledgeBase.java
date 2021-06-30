@@ -1,17 +1,31 @@
 package com.four;
 
-import net.sf.clipsrules.jni.*;
+import net.sf.clipsrules.jni.Environment;
 
 public class KnowledgeBase
 {
-    public static void main(String[] args) {
-        Environment clisp_env = new Environment();
+    Environment clips_env;
 
-        clisp_env.eval("(clear)");
+    public KnowledgeBase() {
+        clips_env = new Environment();
 
-        clisp_env.load("src/clisp/test.clp");
-        clisp_env.eval("(reset)");
-        clisp_env.eval("(facts)");
-        clisp_env.run();
+        clips_env.eval("(clear)");
+        clips_env.eval("(reset)");
+
+        //clips_env.eval("(facts)");
+        //clips_env.eval("(defrule r1 (sintoma ?x) => (printout t ?x crlf))");
+        //clips_env.run();
+    }
+    
+    public void setFact(String fact) {
+        clips_env.assertString("(" + fact + ")");
+    }
+
+    public void setRule(String rule) {
+        clips_env.build("(defrule " + rule + ")");
+    }
+
+    public void execute() {
+        clips_env.run();
     }
 }
