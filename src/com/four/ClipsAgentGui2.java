@@ -8,54 +8,35 @@ import javax.swing.*;
 
 class ClipsAgentGui extends JFrame {
     
-    private ClipsAgent myAgent;
+    private ClipsAgent2 myAgent;
 
-    private JTextField factField;
-    private JTextField ruleField;
+    private JTextField folderField;
 
-    ClipsAgentGui(ClipsAgent a) {
+    ClipsAgentGui(ClipsAgent2 a) {
         
         super(a.getLocalName());
 		
 		myAgent = a;
 
         JPanel p = new JPanel();
-		p.setLayout(new GridLayout(2, 3));
-		p.add(new JLabel("Enter fact:"));
-		factField = new JTextField(15);
-        p.add(factField);
-        JButton addFactButton = new JButton("Add Fact");
-		addFactButton.addActionListener( new ActionListener() {
+		p.setLayout(new GridLayout(1, 3));
+		p.add(new JLabel("Enter folder name:"));
+		folderField = new JTextField(15);
+        p.add(folderField);
+        JButton selectFolderButton = new JButton("Select");
+		selectFolderButton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				try {
-                    String fact = factField.getText().trim();
-                    myAgent.getFact(fact);
-					factField.setText("");
+                    String folderName = factField.getText().trim();
+                    myAgent.getFolderName(folderName);
+					folderField.setText("");
 				}
 				catch (Exception e) {
 					JOptionPane.showMessageDialog(ClipsAgentGui.this, "Invalid value. "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 			}
 		} );
-        p.add(addFactButton);
-
-        p.add(new JLabel("Enter rule:"));
-		ruleField = new JTextField(15);
-		p.add(ruleField);
-        JButton addRuleButton = new JButton("Add Rule");
-		addRuleButton.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
-				try {
-                    String rule = ruleField.getText().trim();
-                    myAgent.getRule(rule);
-					ruleField.setText("");
-				}
-				catch (Exception e) {
-					JOptionPane.showMessageDialog(ClipsAgentGui.this, "Invalid value. "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE); 
-				}
-			}
-		} );
-        p.add(addRuleButton);
+        p.add(selectFolderButton);
 		getContentPane().add(p, BorderLayout.CENTER);
 
         JButton executeButton = new JButton("Execute");

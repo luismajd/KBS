@@ -6,12 +6,14 @@ public class KnowledgeBase
 {
     Environment clips_env;
 
-    public KnowledgeBase() {
+    public KnowledgeBase(String script) {
         clips_env = new Environment();
 
         clips_env.eval("(clear)");
+        if(script != null)
+            clips_env.load("src/clisp/" + script + ".clp");
         clips_env.eval("(reset)");
-
+        
         //clips_env.eval("(facts)");
         //clips_env.eval("(defrule r1 (sintoma ?x) => (printout t ?x crlf))");
         //clips_env.run();

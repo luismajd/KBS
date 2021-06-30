@@ -10,6 +10,7 @@ public class ClipsAgent2 extends Agent {
     private ClipsAgentGui myGui;
 
     KnowledgeBase kb;
+    String folderName;
     
     protected void setup() {
 
@@ -18,8 +19,6 @@ public class ClipsAgent2 extends Agent {
 
         System.out.println("Agent "+getLocalName()+" started.");  
 
-        addBehaviour(new TellBehaviour());
-
     }
 
     protected void takeDown() {
@@ -27,72 +26,59 @@ public class ClipsAgent2 extends Agent {
         System.out.println("Agent "+getLocalName()+" terminating.");
     }
 
-  public void getFact(String fact) {
-        System.out.println("Adding fact: " + fact);
-        kb.setFact(fact);
-  }
-
-  public void getRule(String rule) {
-        System.out.println("Adding rule: " + rule);
-        kb.setRule(rule);
-  }
-
-  public void execute() {
-        //System.out.println("Executing...");
-        addBehaviour(new AskBehaviour());
-  }
-
-  public void terminate() {
-      takeDown();
-  }
-
-  private class TellBehaviour extends Behaviour {
-
-    boolean tellDone = false;
-
-    public void action() {
-
-        System.out.println("Tell is executed");
-
-        kb = new KnowledgeBase();
-        
-        tellDone = true;
-        
-    } 
-        
-    public boolean done() {
-        if (tellDone)
-            return true;
-        else
-            return false;
+    public void getFolderName(String folderName) {
+        System.out.println("Choosing folder: " + folderName);
+        addBehaviour(new TellBehaviour());
+        this.folderName = folderName;
     }
+
+    private class TellBehaviour extends Behaviour {
+
+        boolean tellDone = false;
+
+        public void action() {
+
+            System.out.println("Tell is executed");
+
+            kb = new KnowledgeBase(folderName);
+            
+            tellDone = true;
+
+        } 
+            
+        public boolean done() {
+            if (tellDone)
+                return true;
+            else
+                return false;
+        }
    
-  }    // END of inner class ...Behaviour
+    }    // END of inner class ...Behaviour
 
-  private class AskBehaviour extends Behaviour {
+    private class AskBehaviour extends Behaviour {
 
-    boolean askDone = false;
+        boolean askDone = false;
 
-    public void action() {
+        public void action() {
 
-        System.out.println("Ask is executed");
-    
-        kb.execute();
+            System.out.println("Ask is executed");
+        
+            kb.execute();
 
-        askDone = true;
+            askDone = true;
 
+        } 
+        
+        public boolean done() {
+            if (askDone)
+                return true;
+            else
+                return false;
+        }
+
+        public int onEnd() {
+            myAgent.doDelete();
+            return super.onEnd();
+        } 
     } 
-    
-    public boolean done() {
-        if (askDone)
-            return true;
-        else
-            return false;
-    }
-
-    public int onEnd() {
-        myAgent.doDelete();
-        return super.onEnd();
-    } 
-  } 
 }

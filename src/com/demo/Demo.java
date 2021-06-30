@@ -12,6 +12,7 @@ public class Demo
         // Well, runing from the current working directory works fine
         clisp_env.load("src/clisp/sample.clp");
         clisp_env.eval("(reset)");
+        
         clisp_env.eval("(facts)");
         clisp_env.run();
     }

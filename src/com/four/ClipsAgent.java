@@ -54,7 +54,7 @@ public class ClipsAgent extends Agent {
 
         System.out.println("Tell is executed");
 
-        kb = new KnowledgeBase();
+        kb = new KnowledgeBase(null);
         
         tellDone = true;
         
