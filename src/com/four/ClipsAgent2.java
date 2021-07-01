@@ -32,6 +32,11 @@ public class ClipsAgent2 extends Agent {
         this.folderName = folderName;
     }
 
+    public void execute() {
+        //System.out.println("Executing...");
+        addBehaviour(new AskBehaviour());
+    }
+
     private class TellBehaviour extends Behaviour {
 
         boolean tellDone = false;

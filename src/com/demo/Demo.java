@@ -10,10 +10,12 @@ public class Demo
         clisp_env.eval("(clear)");
 
         // Well, runing from the current working directory works fine
-        clisp_env.load("src/clisp/sample.clp");
+        clisp_env.load("src/com/four/persons/load-persons.clp");
         clisp_env.eval("(reset)");
-        
-        clisp_env.eval("(facts)");
+        clisp_env.run();
+        //clisp_env.eval("(facts)");
+        clisp_env.load("src/com/four/persons/load-persons-rules.clp");
+        clisp_env.eval("(reset)");
         clisp_env.run();
     }
 }

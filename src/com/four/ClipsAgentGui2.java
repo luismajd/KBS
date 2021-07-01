@@ -27,7 +27,7 @@ class ClipsAgentGui extends JFrame {
 		selectFolderButton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				try {
-                    String folderName = factField.getText().trim();
+                    String folderName = folderField.getText().trim();
                     myAgent.getFolderName(folderName);
 					folderField.setText("");
 				}
